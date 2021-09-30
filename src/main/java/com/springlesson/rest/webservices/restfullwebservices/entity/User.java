@@ -26,7 +26,7 @@ public class User {
 
     private String avatarUrl;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
+    @ManyToMany(fetch = FetchType.LAZY)
     private List<Book> favoriteBooks;
 
     public User(String username, String password, Date birthday, String avatarUrl) {

@@ -1,13 +1,15 @@
 package com.springlesson.rest.webservices.restfullwebservices.controller;
 
 import com.springlesson.rest.webservices.restfullwebservices.configuration.WebSecurityConfig;
-import com.springlesson.rest.webservices.restfullwebservices.dto.UserDTO;
+import com.springlesson.rest.webservices.restfullwebservices.dto.BookResponse;
+import com.springlesson.rest.webservices.restfullwebservices.dto.UserResponse;
 import com.springlesson.rest.webservices.restfullwebservices.dto.UserRequest;
 import com.springlesson.rest.webservices.restfullwebservices.dto_service.UserDTOService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
 
 @RestController
 public class UserController {
@@ -19,7 +21,7 @@ public class UserController {
     private WebSecurityConfig webSecurityConfig;
 
     @PostMapping("/registration")
-    public UserDTO registration(@Valid @RequestBody UserRequest userRequest) {
+    public UserResponse registration(@Valid @RequestBody UserRequest userRequest) {
         String encodedPassword = webSecurityConfig.passwordEncoder().encode(userRequest.getPassword());
         userRequest.setPassword(encodedPassword);
         return userDTOService.save(userRequest);
@@ -40,4 +42,8 @@ public class UserController {
         userDTOService.deleteById(id);
     }
 
+    @GetMapping("/users/{id}/books")
+    public List<BookResponse> getAllBooks(@PathVariable("id") Long id) {
+        return userDTOService.getBooksByUserId(id);
+    }
 }

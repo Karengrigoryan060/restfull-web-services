@@ -13,7 +13,7 @@ import java.util.Date;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class UserDTO {
+public class UserResponse {
 
     private Long id;
 
@@ -31,14 +31,14 @@ public class UserDTO {
 
     private String avatarUrl;
 
-    public UserDTO(String username, String password, Date birthday, String avatarUrl) {
+    public UserResponse(String username, String password, Date birthday, String avatarUrl) {
         this.username = username;
         this.password = password;
         this.birthday = birthday;
         this.avatarUrl = avatarUrl;
     }
 
-    public UserDTO(Long id, String username, Date birthday, String avatarUrl) {
+    public UserResponse(Long id, String username, Date birthday, String avatarUrl) {
         this.id = id;
         this.username = username;
         this.birthday = birthday;

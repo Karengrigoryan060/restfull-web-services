@@ -1,6 +1,7 @@
 package com.springlesson.rest.webservices.restfullwebservices.service;
 
 import com.springlesson.rest.webservices.restfullwebservices.entity.User;
+import com.springlesson.rest.webservices.restfullwebservices.interfaces.IService;
 import com.springlesson.rest.webservices.restfullwebservices.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -10,7 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
 @Service
-public class UserService {
+public class UserService implements IService<User> {
 
     @Autowired
     private UserRepository userRepository;
@@ -34,12 +35,13 @@ public class UserService {
     }
 
     @Transactional
-    public void remove(User user) {
+    public void delete(User user) {
         userRepository.delete(user);
     }
 
+    @Override
     @Transactional
-    public void removeById(Long id) {
+    public void deleteById(Long id) {
         User user = getById(id);
         userRepository.delete(user);
     }
